@@ -1,0 +1,85 @@
+Copyright (C) 2012 Matthew Pitkin & Joseph Romano
+
+MatlabMultiNest
+===============
+
+matlabmultinest.tar.gz contains functions for performing nested sampling in
+Matlab and examples of using that functionality. These can be used to perform
+evidence evaluation and posterior parameter estimation using the MultiNest
+algorithm (Feroz, Hobson & Bridges, MNRAS, 398, pp. 1601-1614., 2009,
+arXiv:0809.3437 - referred to as FHB from now) for producing samples from the
+prior, or using an MCMC method to produce the samples (based on the method of
+Veitch & Vecchio, Phys. Rev. D, 81, 062003, 2010, arXiv:0911.3820).
+
+To expand the tarball use:
+
+tar -xvzf matlabmultinest.tar.gz
+
+which will give three directories: NSMain, Examples and Unsorted.
+
+If you have downloaded this to e.g. /home/myname then when in Matlab add the
+files to the Matlab path using:
+addpath /home/myname/matlabmultinest/NSMain:/home/myname/matlabmultinest/Examples:/home/myname/matlabmultinest/Unsorted:
+
+[Note: this should also work in Octave, but if using the multinest sampling the
+octave-statistics package (http://octave.sourceforge.net/statistics/) is required for the kmeans function.]
+
+NSMain
+======
+This directory contains 14 Matlab function files:
+calc_ellipsoid.m
+in_ellipsoids.m
+nested_sampler.m
+scale_parameters.m
+draw_from_ellipsoid.m
+logplus.m
+optimal_ellipsoids.m
+split_ellipsoid.m
+draw_mcmc.m
+mchol.m
+plot_2d_livepoints_with_ellipses.m
+draw_multinest.m
+nest2pos.m
+rescale_parameters.m
+
+Each of these contains an explanatory help function. The function to run the
+nested sampling algorithm is nested_sampler, which calls the other functions.
+The draw_multinest function will draw points from the prior volume based on
+Algorithm 1 of FHB. The draw_mcmc function will draw points from the prior
+using an MCMC with four potential proposal distributions: a Student-t proposal
+distribution based on the covariance of the current nested sampling "live points";
+a differential evolution proposal; and "stretch" and "walk" affine invariant
+proposals (see Goodman & Weare http://msp.org/camcos/2010/5-1/p04.xhtml). The
+fractional time spent using each proposal can be specified.
+
+
+Examples
+========
+This directory contains 4 scripts with examples of how to use the
+nested_sampler function:
+example_sinusoid.m
+example_line.m
+example_line_with_outliers_and_marginalization.m
+example_line_with_outliers.m
+
+The line examples are based on tests set out in Hogg, Bovy &
+Lang, arXiv:1008.4686.
+
+The example_sinusoid script sets up a dataset containing a sinusoid in Gaussian
+white noise, which then samples the prior volume in amplitude and initial phase
+using the nested_sampler. This shows an example of how to set up the data and
+priors on the parameters to be searched over. In this case the model function is
+set to @sinusoid_model and the likelihood function to be used is set to
+@logL_gaussian (see Unsorted below). The model function and likelihood
+functions need to be written in a specific format to be used in the nested
+sampler.
+
+Unsorted
+========
+This directory contains a set of functions used within the examples above or to
+examine data and test some of the functions used in the MultiNest
+implementation.
+
+Attention should be paid to the format of the example model functions, e.g.
+sinusoid_model, and likelihood functions, e.g. logL_gaussian.m, as this
+specific format is required for the nested_sampler function.
