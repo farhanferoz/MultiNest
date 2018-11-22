@@ -162,35 +162,44 @@ Sampling Parameters:
 
 The recommended paramter values to be used with MultiNest are described below. For detailed description please refer to the paper arXiv:0809.3437
 
+
 nPar:
+
 Total no. of parameters, should be equal to ndims in most cases but if you need to store some additional parameters with the actual parameters then you need to pass them through the likelihood routine.
 
 
 efr:
+
 defines the sampling efficiency. 0.8 and 0.3 are recommended for parameter estimation & evidence evalutaion respectively.
 
 
 tol:
+
 A value of 0.5 should give good enough accuracy.
 
            
 nCdims:
+
 If mmodal is T, MultiNest will attempt to separate out the modes. Mode separation is done through a clustering algorithm. Mode separation can be done on all the parameters (in which case nCdims should be set to ndims) & it can also be done on a subset of parameters (in which case nCdims < ndims) which might be advantageous as clustering is less accurate as the dimensionality increases. If nCdims < ndims then mode separation is done on the first nCdims parameters.
 
 
 Ztol:
+
 If mmodal is T, MultiNest can find multiple modes & also specify which samples belong to which mode. It might be desirable to have separate samples & mode statistics for modes with local log-evidence value greater than a particular value in which case Ztol should be set to that value. If there isn't any particularly interesting Ztol value, then Ztol should be set to a very large negative number (e.g. -1.d90).
 
 ---------------------------------------------------------------------------
 
 Progress Monitoring:
 
+
 MultiNest produces [root]phys_live.dat & [root]ev.dat files after every updInt iterations which can be used to monitor the progress. The format & contents of  these two files are as follows:
 
 [root]phys_live.dat:
+
 This file contains the current set of live points. It has nPar+2 columns. The first nPar columns are the ndim parameter values along with the (nPar-ndim)  additional parameters that are being passed by the likelihood routine for MultiNest to save along with the ndim parameters. The nPar+1 column is the log-likelihood value & the last column is the node no. (used for clustering).
 
 [root]ev.dat:
+
 This file contains the set of rejected points. It has nPar+3 columns. The first nPar columns are the ndim parameter values along with the (nPar-ndim)  additional parameters that are being passed by the likelihood routine for MultiNest to save along with the ndim parameters. The nPar+1 column is the log-likelihood value, nPar+2 column is the log(prior mass) & the last column  is the node no. (used for clustering).
 
 ---------------------------------------------------------------------------
@@ -203,22 +212,27 @@ MultiNest will produce five posterior sample files in the root, given by the use
 
 
 [root].txt
+
 Compatable with getdist with 2+nPar columns. Columns have sample probability, -2*loglikehood, parameter values. Sample probability is the sample prior mass multiplied by its likelihood & normalized by the evidence.
 
 
 [root]post_separate.dat
+
 This file is only created if mmodal is set to T. Posterior samples for modes with local log-evidence value greater than Ztol, separated by 2 blank lines. Format is the same as [root].txt file.
 
 
 [root]stats.dat
+
 Contains the global log-evidence, its error & local log-evidence with error & parameter means & standard deviations as well as the  best fit & MAP parameters of each of the mode found with local log-evidence > Ztol.
 
 
 [root]post_equal_weights.dat
+
 Contains the equally weighted posterior samples. Columns have parameter values followed by loglike value.
 
 
 [root]summary.txt
+
 There are nmode+1 (nmode = number of modes) rows in this file. First row has the statistics for the global posterior. After the first line there is one row per mode with nPar*4+2 values in each line in this file. Each row has the following values in its column mean parameter values, standard deviations of the parameters,  bestfit (maxlike) parameter values, MAP (maximum-a-posteriori) parameter values, local log-evidence, maximum  loglike value. If IS = T (i.e. INS being used), first row has an additional value right at the end, INS log-evidence estimate.
 
 ---------------------------------------------------------------------------
@@ -234,9 +248,11 @@ Birth contour files:
 MultiNest produces [root]phys_live-birth.txt & [root]dead-birth.txt files after every updInt iterations which can be used to reconstruct a full nested sampling run, as well as simulate dynamic nested sampling. The format & contents of  these two files are as follows:
 
 [root]phys_live-birth.txt:
+
 This file contains the current set of live points. It has nPar+3 columns. The first nPar columns are the ndim parameter values along with the (nPar-ndim)  additional parameters that are being passed by the likelihood routine for MultiNest to save along with the ndim parameters. The nPar+1 column is the log-likelihood value. The nPar+2 column is the log-likelihood value that the point was born at & the last column is the node no. (used for clustering). This is identical to the [root]phys_live-birth.dat file, except for an additional column including the birth contours
 
 [root]dead-birth.txt:
+
 This file contains the set of rejected points. It has nPar+4 columns. The first nPar columns are the ndim parameter values along with the (nPar-ndim)  additional parameters that are being passed by the likelihood routine for MultiNest to save along with the ndim parameters. The nPar+1 column is the log-likelihood value, the nPar+2 column is the log-likelihood value that the point was born at and the nPar+2 column is the log(prior mass) & the last column  is the node no. (used for clustering).  This is identical to the [root]ev.dat file, except for an additional column including the birth contours.
 
 ---------------------------------------------------------------------------
@@ -293,28 +309,44 @@ Toy Problems
 
 There are 8 toy programs included with MultiNest.
 
+
 example_obj_detect:
+
 The object detection problem discussed in arXiv:0704.3704. The positions, amplitudes & widths of the Gaussian objects can be modified through params.f90 file. Sampling parameters are also set in params.f90.
 
+
 example_gauss_shell:
+
 The Gaussian shells problem discussed in arXiv:0809.3437. The dimensionality, positions and thickness of these shells can be modified through params.f90 file. Sampling parameters are also set in params.f90.
 
+
 example_gaussian:
+
 The Gaussian shells problem discussed in arXiv:1001.0719. The dimensionality of the problem can be modified through params.f90 file. Sampling parameters are also set in params.f90.
 
+
 example_eggboxC/example_eggboxC++:
+
 The C/C++ interface includes the egg box problem discussed in arXiv:0809.3437. The toy problem and sampling parameters are set in eggbox.c & eggbox.cc files.
 
+
 example_ackley:
+
 The Ackley mimimization problem (see T. Bäck, Evolutionary Algorithms in Theory and Practice, Oxford University Press, New York (1996).)
 
+
 example_himmelblau:
+
 The Himmelblau's minimization problem. (see http://en.wikipedia.org/wiki/Himmelblau's_function)
 
+
 example_rosenbrock:
+
 Rosenbrock minimization problem. (see http://en.wikipedia.org/wiki/Rosenbrock_function)
 
+
 example_gaussian:
+
 Multivariate Gaussian with uncorrelated paramters.
 
 ---------------------------------------------------------------------------
