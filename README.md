@@ -93,13 +93,13 @@ likelihood routine: slikelihood(Cube,ndims,nPar,lnew,context)
 
 Cube(1:nPar) has nonphysical parameters.
 
-scale Cube(1:n_dim) & return the scaled parameters in Cube(1:n_dim) & additional parameters that you want to be returned by MultiNest along with the actual parameters in Cube(n_dim+1:nPar)
+Scale Cube(1:n_dim) & return the scaled parameters in Cube(1:n_dim) & additional parameters that you want to be returned by MultiNest along with the actual parameters in Cube(n_dim+1:nPar).
 
 Return the log-likelihood in lnew.
 
 ---------------------------------------------------------------------------
 
-dumper routine: dumper(nSamples,nlive,nPar,physLive,posterior,paramConstr,maxloglike,logZ,INSlogZ,logZerr,context)
+Dumper routine: dumper(nSamples,nlive,nPar,physLive,posterior,paramConstr,maxloglike,logZ,INSlogZ,logZerr,context)
 
 This routine is called after every updInt*10 iterations & at the end of the sampling allowing the posterior distribution & parameter constraints to be passed on to the user in the memory. The argument are as follows:
 
@@ -162,7 +162,7 @@ Sampling Parameters:
 
 The recommended paramter values to be used with MultiNest are described below. For detailed description please refer to the paper arXiv:0809.3437
 
-nPar: 
+nPar:
 Total no. of parameters, should be equal to ndims in most cases but if you need to store some additional parameters with the actual parameters then you need to pass them through the likelihood routine.
 
 
@@ -293,22 +293,29 @@ Toy Problems
 
 There are 8 toy programs included with MultiNest.
 
-example_obj_detect: The object detection problem discussed in arXiv:0704.3704. The positions, amplitudes & widths of the Gaussian objects can be modified through params.f90 file. Sampling parameters are also set in params.f90.
+example_obj_detect:
+The object detection problem discussed in arXiv:0704.3704. The positions, amplitudes & widths of the Gaussian objects can be modified through params.f90 file. Sampling parameters are also set in params.f90.
 
-example_gauss_shell: The Gaussian shells problem discussed in arXiv:0809.3437. The dimensionality, positions and thickness of these shells can be modified through params.f90 file. Sampling parameters are also set in params.f90.
+example_gauss_shell:
+The Gaussian shells problem discussed in arXiv:0809.3437. The dimensionality, positions and thickness of these shells can be modified through params.f90 file. Sampling parameters are also set in params.f90.
 
-example_gaussian: The Gaussian shells problem discussed in arXiv:1001.0719. The dimensionality of the problem can be modified through params.f90 file. Sampling parameters are also set in params.f90.
+example_gaussian:
+The Gaussian shells problem discussed in arXiv:1001.0719. The dimensionality of the problem can be modified through params.f90 file. Sampling parameters are also set in params.f90.
 
-example_eggboxC/example_eggboxC++: The C/C++ interface includes the egg box problem discussed in arXiv:0809.3437. The toy problem and sampling parameters are set in eggbox.c & eggbox.cc files.
+example_eggboxC/example_eggboxC++:
+The C/C++ interface includes the egg box problem discussed in arXiv:0809.3437. The toy problem and sampling parameters are set in eggbox.c & eggbox.cc files.
 
-example_ackley: The Ackley mimimization problem (see T. Bäck, Evolutionary Algorithms in Theory and Practice, 
-Oxford University Press, New York (1996).)
+example_ackley:
+The Ackley mimimization problem (see T. Bäck, Evolutionary Algorithms in Theory and Practice, Oxford University Press, New York (1996).)
 
-example_himmelblau: The Himmelblau's minimization problem. (see http://en.wikipedia.org/wiki/Himmelblau's_function)
+example_himmelblau:
+The Himmelblau's minimization problem. (see http://en.wikipedia.org/wiki/Himmelblau's_function)
 
-example_rosenbrock: Rosenbrock minimization problem. (see http://en.wikipedia.org/wiki/Rosenbrock_function)
+example_rosenbrock:
+Rosenbrock minimization problem. (see http://en.wikipedia.org/wiki/Rosenbrock_function)
 
-example_gaussian: Multivariate Gaussian with uncorrelated paramters.
+example_gaussian:
+Multivariate Gaussian with uncorrelated paramters.
 
 ---------------------------------------------------------------------------
 
