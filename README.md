@@ -41,32 +41,51 @@ The subtoutine to begin MultiNest are as follows:
 subroutine nestRun(IS, mmodal, ceff, nlive, tol, efr, ndims, nPar, nCdims, maxModes, updInt, Ztol, root, seed,
 pWrap, feedback, resume, outfile, initMPI, logZero, maxiter, loglike, dumper, context)
 
-logical IS                !do Importance Nested Sampling (INS)?
-logical mmodal            !do mode separation?
-integer nlive 	 					!number of live points
-logical ceff							!run in constant efficiency mode
-double precision tol 		 	!evidence tolerance factor
-double precision efr 		 	!sampling efficiency
-integer ndims	 						!number of dimensions
-integer nPar	 						!total no. of parameters
-integer nCdims						!no. of parameters on which clustering should be performed (read below)
-integer maxModes					!maximum no. of modes (for memory allocation)
-integer updInt						!iterations after which the output files should be written
-double precision Ztol			!null log-evidence (read below)
-character(LEN=1000) root  !root for MultiNest output files
-integer seed 		 					!random no. generator seed, -ve value for seed from the sys clock
-integer pWrap[ndims]			!wraparound parameters?
-logical feedback					!need update on sampling progress?
-logical resume						!resume from a previous run?
-logical outfile						!write output files?
-logical initMPI						!initialize MPI routines?, relevant only if compiling with MPI
-								          !set it to F if you want your main program to handle MPI initialization
-double precision logZero	!points with loglike < logZero will be ignored by MultiNest
-integer maxiter						!max no. of iterations, a non-positive value means infinity. MultiNest will terminate if either it 
-								          !has done max no. of iterations or convergence criterion (defined through tol) has been satisfied
-loglike(Cube,ndims,nPar,lnew) 	!subroutine which gives lnew=loglike(Cube(ndims))
-dumper(nSamples,nlive,nPar,physLive,posterior, paramConstr,maxloglike,logZ,INSlogZ,logZerr,c)		!subroutine called after every updInt*10 iterations with the posterior distribution, parameter constraints, max loglike & log evidence values
-integer context. Not required by MultiNest, any additional information user wants to pass
+logical IS !do Importance Nested Sampling (INS)?
+
+logical mmodal !do mode separation?
+
+integer nlive !number of live points
+
+logical ceff !run in constant efficiency mode
+
+double precision tol !evidence tolerance factor
+
+double precision efr !sampling efficiency
+
+integer ndims !number of dimensions
+
+integer nPar !total no. of parameters
+
+integer nCdims !no. of parameters on which clustering should be performed (read below)
+
+integer maxModes !maximum no. of modes (for memory allocation)
+
+integer updInt !iterations after which the output files should be written
+
+double precision Ztol !null log-evidence (read below)
+
+character(LEN=1000) root !root for MultiNest output files
+
+integer seed !random no. generator seed, -ve value for seed from the sys clock
+
+integer pWrap[ndims] !wraparound parameters?
+
+logical feedback !need update on sampling progress?
+
+logical resume !resume from a previous run?
+
+logical outfile !write output files?
+
+logical initMPI !initialize MPI routines?, relevant only if compiling with MPI. Set it to F if you want your main program to handle MPI initialization
+
+double precision logZero !points with loglike < logZero will be ignored by MultiNest
+
+integer maxiter !max no. of iterations, a non-positive value means infinity. MultiNest will terminate if either it has done max no. of iterations or convergence criterion (defined through tol) has been satisfied
+
+loglike(Cube,ndims,nPar,lnew) !subroutine which gives lnew=loglike(Cube(ndims))
+
+dumper(nSamples,nlive,nPar,physLive,posterior, paramConstr,maxloglike,logZ,INSlogZ,logZerr,c) !subroutine called after every updInt*10 iterations with the posterior distribution, parameter constraints, max loglike & log evidence values integer context. Not required by MultiNest, any additional information user wants to pass
       
 --------------------------------------------------------------------------- 
 
@@ -85,20 +104,31 @@ dumper routine: dumper(nSamples,nlive,nPar,physLive,posterior,paramConstr,maxlog
 This routine is called after every updInt*10 iterations & at the end of the sampling allowing the posterior distribution & parameter constraints to be passed on to the user in the memory. The argument are as follows:
 
 nSamples = total number of samples in posterior distribution
+
 nlive	= total number of live points
+
 nPar = total number of parameters (free + derived)
+
 physLive(nlive, nPar+1) = 2D array containing the last set of live points (physical parameters plus derived parameters) along with their loglikelihood values
+
 posterior(nSamples, nPar+2) = posterior distribution containing nSamples points. Each sample has nPar parameters (physical + derived) along with the their loglike value & posterior probability
+
 paramConstr(1, 4*nPar):
      paramConstr(1, 1) to paramConstr(1, nPar) = mean values of the parameters
      paramConstr(1, nPar+1) to paramConstr(1, 2*nPar) = standard deviation of the parameters
      paramConstr(1, nPar*2+1) to paramConstr(1, 3*nPar) = best-fit (maxlike) parameters
      paramConstr(1, nPar*4+1) to paramConstr(1, 4*nPar) = MAP (maximum-a-posteriori) parameters
+
 maxLogLike = maximum loglikelihood value
+
 logZ = log evidence value from the default (non-INS) mode
+
 INSlogZ = log evidence value from the INS mode
+
 logZerr = error on log evidence value
+
 context= not required by MultiNest, any additional information user wants to pass
+
 
 The 2D arrays are Fortran arrays which are different to C/C++ arrays. In the example dumper routine provided with C & C++ eggbox examples, the Fortran arrays are copied on to C/C++ arrays.
 
