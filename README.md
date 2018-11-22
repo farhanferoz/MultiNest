@@ -114,10 +114,10 @@ physLive(nlive, nPar+1) = 2D array containing the last set of live points (physi
 posterior(nSamples, nPar+2) = posterior distribution containing nSamples points. Each sample has nPar parameters (physical + derived) along with the their loglike value & posterior probability
 
 paramConstr(1, 4*nPar):
-     paramConstr(1, 1) to paramConstr(1, nPar) = mean values of the parameters
-     paramConstr(1, nPar+1) to paramConstr(1, 2*nPar) = standard deviation of the parameters
-     paramConstr(1, nPar*2+1) to paramConstr(1, 3*nPar) = best-fit (maxlike) parameters
-     paramConstr(1, nPar*4+1) to paramConstr(1, 4*nPar) = MAP (maximum-a-posteriori) parameters
+paramConstr(1, 1) to paramConstr(1, nPar) = mean values of the parameters
+paramConstr(1, nPar+1) to paramConstr(1, 2*nPar) = standard deviation of the parameters
+paramConstr(1, nPar*2+1) to paramConstr(1, 3*nPar) = best-fit (maxlike) parameters
+paramConstr(1, nPar*4+1) to paramConstr(1, 4*nPar) = MAP (maximum-a-posteriori) parameters
 
 maxLogLike = maximum loglikelihood value
 
