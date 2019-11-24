@@ -1,9 +1,9 @@
 # MultiNest
-MultiNest v 3.11
+MultiNest
 Farhan Feroz, Mike Hobson
 f.feroz@mrao.cam.ac.uk
 arXiv:0704.3704, arXiv:0809.3437 & arXiv:1306.2144
-Released Apr 2018
+Released Nov 2019
 
 ---------------------------------------------------------------------------
 

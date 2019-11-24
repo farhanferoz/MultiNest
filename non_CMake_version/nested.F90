@@ -219,9 +219,9 @@ contains
 		endif
       
 		write(*,*)"*****************************************************"
-		write(*,*)"MultiNest v3.11"
+		write(*,*)"MultiNest v3.12"
       		write(*,*)"Copyright Farhan Feroz & Mike Hobson"
-      		write(*,*)"Release Apr 2018"
+      		write(*,*)"Release Nov 2019"
 		write(*,*)
       		write(*,'(a,i4)')" no. of live points = ",nest_nlive
       		write(*,'(a,i4)')" dimensionality = ",nest_ndims
@@ -2844,7 +2844,7 @@ contains
 	write(*,'(a,i14)')   	     'Replacements:                     ',nacc
 	write(*,'(a,i14)')   	     'Total Samples:                    ',nlike
 	write(*,'(a,F14.6)')	     'Nested Sampling ln(Z):            ',logZ
-	if( IS ) write(*,'(a,F14.6,a,F10.6)')'Importance Nested Sampling ln(Z): ',IS_Z(1), ' +/-', IS_Z(2)
+	if( IS ) write(*,'(a,F14.6)')'Importance Nested Sampling ln(Z): ',IS_Z(1)
 	if(dswitch) write(*,'(a,i5)')'Total No. of Live Points:         ',nlive
     
   end subroutine gfeedback

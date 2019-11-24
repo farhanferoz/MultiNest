@@ -122,6 +122,20 @@ function LogNormalPrior(r,a,sigma)
 
 end function LogNormalPrior
 
+!=======================================================================
+
+! Uniform[0:1]  ->  Exponential[lambda=lambda]
+
+function ExponentialPrior(r,lambda)
+
+      	implicit none
+
+      	double precision r,lambda,ExponentialPrior
+      	
+      	ExponentialPrior=-log(r) / lambda
+
+end function ExponentialPrior
+
 !=======================================================================       
 ! Inverse of complimentary error function in double precision
 
