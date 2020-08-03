@@ -135,7 +135,7 @@ int main(int argc, char *argv[])
 	int pWrap[ndims];				// which parameters to have periodic boundary conditions?
 	for(i = 0; i < ndims; i++) pWrap[i] = 0;
 	
-	char root[100] = "chains/eggboxC-";		// root for output files
+	char root[1000] = "chains/eggboxC-";		// root for output files
 	
 	int seed = -1;					// random no. generator seed, if < 0 then take the seed from system clock
 	
