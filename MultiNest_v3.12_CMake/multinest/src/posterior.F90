@@ -162,7 +162,8 @@ contains
 		else
 			i=i+1
 			if(i*(nPar+4)>size(evDataAll)) exit
-			ltmp(1:nPar+2)=evDataAll((i-1)*(nPar+4)+1:(i-1)*(nPar+4)+nPar+2)
+			ltmp(1:nPar+1)=evDataAll((i-1)*(nPar+4)+1:(i-1)*(nPar+4)+nPar+1)
+			ltmp(nPar+2)=evDataAll((i-1)*(nPar+4)+nPar+3)
 			i1=int(evDataAll(i*(nPar+4)))
 		endif
 		
